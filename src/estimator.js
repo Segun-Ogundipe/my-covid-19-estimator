@@ -1,8 +1,7 @@
 import ImpactEstimator from './ImpactEstimator';
 
 const covid19ImpactEstimator = (data) => {
-  const input = data;
-  const impact = new ImpactEstimator(input);
+  const impact = new ImpactEstimator(data);
   impact
     .calcCurrentlyInfected()
     .calcInfectionByRequestedTime()
@@ -12,7 +11,7 @@ const covid19ImpactEstimator = (data) => {
     .calcCasesForVentilatorsByRequestedTime()
     .calcDollarsInFlight();
 
-  const severeImpact = new ImpactEstimator(input, true);
+  const severeImpact = new ImpactEstimator(data, true);
   severeImpact
     .calcCurrentlyInfected()
     .calcInfectionByRequestedTime()
@@ -22,7 +21,7 @@ const covid19ImpactEstimator = (data) => {
     .calcCasesForVentilatorsByRequestedTime()
     .calcDollarsInFlight();
   return {
-    input,
+    data,
     impact: impact.getImpact(),
     severeImpact: severeImpact.getImpact()
   };
