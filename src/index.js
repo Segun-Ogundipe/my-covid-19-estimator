@@ -13,13 +13,12 @@ const app = express();
 app.use(cors());
 
 // Normal express config defaults
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, '../access.log'),
-  { flags: 'a' }
-);
+const accessLog = fs.createWriteStream(path.join(__dirname, '../access.log'), {
+  flags: 'a'
+});
 app.use(
   morgan(':method  :url  :status  :response-time ms', {
-    stream: accessLogStream
+    stream: accessLog
   })
 );
 
