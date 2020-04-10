@@ -18,8 +18,8 @@ describe('Estimator Test', () => {
   test('test basic impact', () => {
     const estimate = covid19Estimator(input);
 
-    expect(estimate).not.toBeNull();
-    expect(estimate.estimate.impact).toEqual({
+    expect(estimate.impact).not.toBeNull();
+    expect(estimate.impact).toEqual({
       currentlyInfected: 5820,
       infectionsByRequestedTime: 46560,
       severeCasesByRequestedTime: 6984,
@@ -33,8 +33,8 @@ describe('Estimator Test', () => {
   test('test severe impact', () => {
     const estimate = covid19Estimator(input);
 
-    expect(estimate).not.toBeNull();
-    expect(estimate.estimate.severeImpact).toEqual({
+    expect(estimate.severeImpact).not.toBeNull();
+    expect(estimate.severeImpact).toEqual({
       currentlyInfected: 29100,
       infectionsByRequestedTime: 232800,
       severeCasesByRequestedTime: 34920,
