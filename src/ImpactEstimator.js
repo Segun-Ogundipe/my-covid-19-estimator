@@ -103,7 +103,9 @@ export default class ImpactEstimator {
     const pop = this.input.region.avgDailyIncomePopulation;
     const usd = this.input.region.avgDailyIncomeInUSD;
 
-    this.impact.dollarsInFlight = (infections * pop * usd * days).toFixed(2);
+    this.impact.dollarsInFlight = Number(
+      (infections * pop * usd * days).toFixed(2)
+    );
 
     return this;
   }

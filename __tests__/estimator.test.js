@@ -26,7 +26,7 @@ describe('Estimator Test', () => {
       hospitalBedsByRequestedTime: 998794,
       casesForICUByRequestedTime: 2328,
       casesForVentilatorsByRequestedTime: 931,
-      dollarsInFlight: '1745301.60'
+      dollarsInFlight: 1745301.6
     });
   });
 
@@ -41,7 +41,7 @@ describe('Estimator Test', () => {
       hospitalBedsByRequestedTime: 970858,
       casesForICUByRequestedTime: 11640,
       casesForVentilatorsByRequestedTime: 4656,
-      dollarsInFlight: '8726508.00'
+      dollarsInFlight: 8726508.0
     });
   });
 });
