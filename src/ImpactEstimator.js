@@ -36,9 +36,10 @@ export default class ImpactEstimator {
    */
   calcInfectionByRequestedTime() {
     const days = this.convertToDays();
+    const infected = this.impact.currentlyInfected;
+    const calc = infected * 2 ** Math.trunc(days / 3);
 
-    this.impact.infectionsByRequestedTime
-      = this.impact.currentlyInfected * 2 ** Math.trunc(days / 3);
+    this.impact.infectionsByRequestedTime = calc;
 
     return this;
   }
@@ -60,10 +61,10 @@ export default class ImpactEstimator {
    * Returns the Estimator Object.
    */
   caclHospitalBedsByRequestedTime() {
-    this.impact.hospitalBedsByRequestedTime = Math.trunc(
-      0.35 * this.input.totalHospitalBeds
-        - this.impact.severeCasesByRequestedTime
-    );
+    const beds = this.input.totalHospitalBeds;
+    const severe = this.impact.severeCasesByRequestedTime;
+
+    this.impact.hospitalBedsByRequestedTime = Math.trunc(0.35 * beds - severe);
 
     return this;
   }
@@ -98,12 +99,11 @@ export default class ImpactEstimator {
    */
   calcDollarsInFlight() {
     const days = this.convertToDays();
-    this.impact.dollarsInFlight = (
-      this.impact.infectionsByRequestedTime
-      * this.input.region.avgDailyIncomePopulation
-      * this.input.region.avgDailyIncomeInUSD
-      * days
-    ).toFixed(2);
+    const infections = this.impact.infectionsByRequestedTime;
+    const pop = this.input.region.avgDailyIncomePopulation;
+    const usd = this.input.region.avgDailyIncomeInUSD;
+
+    this.impact.dollarsInFlight = (infections * pop * usd * days).toFixed(2);
 
     return this;
   }
