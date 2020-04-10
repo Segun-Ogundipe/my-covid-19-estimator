@@ -16,8 +16,9 @@ app.use(cors());
 const accessLog = fs.createWriteStream(path.join(__dirname, '../access.log'), {
   flags: 'a'
 });
+
 app.use(
-  morgan(':method  :url  :status  :response-time ms', {
+  morgan(':date[iso]  :url  done in :response-time seconds', {
     stream: accessLog
   })
 );
