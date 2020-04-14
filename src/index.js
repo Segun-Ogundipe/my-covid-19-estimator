@@ -18,7 +18,9 @@ const accessLog = fs.createWriteStream(path.join(__dirname, '../access.log'), {
 });
 
 app.use(
-  morgan(':method  :url  done in :response-time seconds', { stream: accessLog })
+  morgan(':method\t\t:url\t\tdone in :response-time seconds', {
+    stream: accessLog
+  })
 );
 
 app.use(express.urlencoded({ extended: false }));
