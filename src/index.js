@@ -31,8 +31,12 @@ app.use((req, res, next) => {
   const { statusCode } = res;
   const startTime = process.hrtime();
   const timeInMS = getTimeInMilliseconds(startTime).toLocaleString();
-  const message = `${method}\t\t${url}\t\t${statusCode}\t\t${timeInMS} ms`;
-  const filePath = path.join(__dirname, '../access.log');
+  const message = `${method}\t\t${url}\t\t${statusCode}\t\t${Math.floor(
+    timeInMS
+  )
+    .toString()
+    .padStart(2, '00')}ms`;
+  const filePath = path.join(__dirname, 'request_logs.txt');
 
   saveToFile(message, filePath);
   next();
