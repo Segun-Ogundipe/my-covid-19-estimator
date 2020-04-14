@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   )
     .toString()
     .padStart(2, '00')}ms`;
-  const filePath = path.join(__dirname, 'request_logs.txt');
+  const filePath = path.join(__dirname, '../access.log');
 
   saveToFile(message, filePath);
   next();
