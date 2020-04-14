@@ -10,18 +10,34 @@ import covid19ImpactEstimator from './estimator';
 // Create global app object
 const app = express();
 
+const getTimeInMilliseconds = (startTime) => {
+  const NS_PER_SEC = 1e9; // time in nano seconds
+  const NS_TO_MS = 1e6; // time in milli seconds
+  const timeDifference = process.hrtime(startTime);
+  return (timeDifference[0] * NS_PER_SEC + timeDifference[1]) / NS_TO_MS;
+};
+
+const saveToFile = (data, filename) => {
+  fs.appendFile(filename, `${data}\n`, (err) => {
+    if (err) {
+      throw new Error('The data could not be saved');
+    }
+  });
+};
+
 app.use(cors());
 
-// Normal express config defaults
-const accessLog = fs.createWriteStream(path.join(__dirname, '../access.log'), {
-  flags: 'a'
-});
+app.use((req, res, next) => {
+  const { method, url } = req;
+  const { statusCode } = res;
+  const startTime = process.hrtime();
+  const timeInMS = getTimeInMilliseconds(startTime).toLocaleString();
+  const message = `${method}\t\t${url}\t\t${statusCode}\t\t${timeInMS} ms`;
+  const filePath = path.join(__dirname, '../access.log');
 
-app.use(
-  morgan(':method\t\t:url\t\t:status :response-time seconds', {
-    stream: accessLog
-  })
-);
+  saveToFile(message, filePath);
+  next();
+});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
