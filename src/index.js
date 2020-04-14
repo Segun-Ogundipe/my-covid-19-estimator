@@ -1,7 +1,6 @@
 import '@babel/polyfill';
 import express from 'express';
 import cors from 'cors';
-import morgan from 'morgan';
 import X2JS from 'x2js';
 import fs from 'fs';
 import path from 'path';
