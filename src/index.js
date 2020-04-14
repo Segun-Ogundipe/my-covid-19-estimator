@@ -13,12 +13,12 @@ const app = express();
 app.use(cors());
 
 // Normal express config defaults
-const accessLog = fs.createWriteStream(path.join(__dirname, '../access.log'), {
+const log = fs.createWriteStream(path.join(__dirname, '../access.log'), {
   flags: 'a'
 });
 
 app.use(
-  morgan(':method  :url  done in :response-time seconds', { stream: accessLog })
+  morgan(':method  :url  done in :response-time seconds', { stream: log })
 );
 
 app.use(express.urlencoded({ extended: false }));
